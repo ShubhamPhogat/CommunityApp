@@ -2,19 +2,18 @@
 import express from "express";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
-import connectDb from "./Db.js";
 import findConfig from "find-config";
 import cors from "cors";
 import authRouter from "./routers/authRouter.js";
 import roleRouter from "./routers/roleRouter.js";
 import communityRouter from "./routers/communityRouter.js";
 import memberRouter from "./routers/memberRouter.js";
+import connectToMongoDB from "./Db.js";
 
 dotenv.config({ path: findConfig("/.env") });
 const app = express();
 const PORT = 8000;
-connectDb();
-
+connectToMongoDB();
 //middleware
 app.use(cors({ origin: true }));
 app.use((req, res, next) => {
